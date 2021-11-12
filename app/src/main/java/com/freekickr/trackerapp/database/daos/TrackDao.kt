@@ -17,14 +17,14 @@ interface TrackDao: GenericDao<Track> {
     @Query("SELECT * FROM tracks_table ORDER BY distance DESC")
     fun getAllSortedByDistance(): LiveData<List<Track>>
 
-    @Query("SELECT * FROM tracks_table ORDER BY timeInterval DESC")
-    fun getAllSortedByTimeInterval(): LiveData<List<Track>>
+    @Query("SELECT * FROM tracks_table ORDER BY elapsedTime DESC")
+    fun getAllSortedByElapsedTime(): LiveData<List<Track>>
 
     @Query("SELECT * FROM tracks_table ORDER BY calories DESC")
     fun getAllSortedByCalories(): LiveData<List<Track>>
 
-    @Query("SELECT SUM(timeInterval) FROM TRACKS_TABLE")
-    fun getTotalTimeMillis(): LiveData<Long>
+    @Query("SELECT SUM(elapsedTime) FROM TRACKS_TABLE")
+    fun getTotalElapsedTime(): LiveData<Long>
 
     @Query("SELECT SUM(calories) FROM TRACKS_TABLE")
     fun getTotalCalories(): LiveData<Int>

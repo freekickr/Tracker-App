@@ -12,7 +12,7 @@ data class Track(
     val img: Bitmap? = null,
     val avgSpeed: Float = 0f,
     val distance: Int = 0,
-    val timeInterval: Long = 0L,
+    val elapsedTime: Long = 0L,
     val calories: Int = 0,
     val timestamp: Long = 0L
 )

@@ -9,7 +9,8 @@ import com.freekickr.trackerapp.database.entities.Track
 
 @Database(
     entities = [Track::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class TrackerDatabase: RoomDatabase() {
