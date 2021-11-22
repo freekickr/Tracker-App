@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.freekickr.trackerapp.databinding.FragmentRunBinding
+import com.freekickr.trackerapp.ui.adapters.TrackAdapter
 import com.freekickr.trackerapp.ui.viewmodels.MainViewModel
 import com.freekickr.trackerapp.utils.ErrorType
 import com.freekickr.trackerapp.utils.PermissionsChecker
@@ -26,12 +27,16 @@ class RunFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModels()
 
+    private lateinit var adapter: TrackAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRunBinding.inflate(layoutInflater)
+
+        initAdapter()
 
         return binding.root
     }
@@ -43,7 +48,16 @@ class RunFragment : Fragment() {
             findNavController().navigate(RunFragmentDirections.actionRunFragmentToTrackingFragment())
         }
 
+        viewModel.tracksSortedByDate.observe(viewLifecycleOwner, {
+            adapter.updateList(it)
+        })
+
         requestPermissions()
+    }
+
+    private fun initAdapter() {
+        adapter = TrackAdapter()
+        binding.rvTrackHistory.adapter = adapter
     }
 
     private fun requestPermissions() {
