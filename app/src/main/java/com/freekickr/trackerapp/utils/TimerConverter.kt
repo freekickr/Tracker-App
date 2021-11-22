@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit
 
 object TimerConverter {
 
-    fun getFormattedStopWatchTime(ms: Long, includeMillis: Boolean): String {
+    fun getFormattedStopWatchTime(ms: Long, includeMillis: Boolean = false): String {
         var millis = ms
         val hours = TimeUnit.MILLISECONDS.toHours(millis)
         millis -= TimeUnit.HOURS.toMillis(hours)

@@ -1,7 +1,11 @@
 package com.freekickr.trackerapp.di
 
 import android.annotation.SuppressLint
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
+import com.freekickr.trackerapp.ui.MainActivity
+import com.freekickr.trackerapp.utils.Constants
 import com.google.android.gms.location.FusedLocationProviderClient
 import dagger.Module
 import dagger.Provides
