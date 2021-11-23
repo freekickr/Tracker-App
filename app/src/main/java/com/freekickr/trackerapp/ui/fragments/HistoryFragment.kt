@@ -14,21 +14,21 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.freekickr.trackerapp.databinding.FragmentRunBinding
+import com.freekickr.trackerapp.databinding.FragmentHistoryBinding
 import com.freekickr.trackerapp.domain.TrackSortingOrder
 import com.freekickr.trackerapp.ui.adapters.TrackAdapter
-import com.freekickr.trackerapp.ui.viewmodels.MainViewModel
+import com.freekickr.trackerapp.ui.viewmodels.HistoryViewModel
 import com.freekickr.trackerapp.utils.ErrorType
 import com.freekickr.trackerapp.utils.PermissionsChecker
 import com.freekickr.trackerapp.utils.PermissionsResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RunFragment : Fragment() {
+class HistoryFragment : Fragment() {
 
-    private lateinit var binding: FragmentRunBinding
+    private lateinit var binding: FragmentHistoryBinding
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: HistoryViewModel by viewModels()
 
     private lateinit var adapter: TrackAdapter
 
@@ -37,7 +37,7 @@ class RunFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRunBinding.inflate(layoutInflater)
+        binding = FragmentHistoryBinding.inflate(layoutInflater)
 
         initAdapter()
 
@@ -50,7 +50,7 @@ class RunFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.fabNewTrack.setOnClickListener {
-            findNavController().navigate(RunFragmentDirections.actionRunFragmentToTrackingFragment())
+            findNavController().navigate(HistoryFragmentDirections.actionHistoryFragmentToTrackingFragment())
         }
 
         binding.spFilter.setSelection(viewModel.sortType.ordinal)
@@ -82,11 +82,7 @@ class RunFragment : Fragment() {
     private fun permissionChecked(result: PermissionsResult) {
         when (result::class) {
             PermissionsResult.Ok::class -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Разрещения выданы",
-                    Toast.LENGTH_SHORT
-                ).show()
+
             }
             PermissionsResult.Error::class -> {
                 when ((result as PermissionsResult.Error).error) {

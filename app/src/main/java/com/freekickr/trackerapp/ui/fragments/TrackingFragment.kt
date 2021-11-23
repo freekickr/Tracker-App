@@ -13,9 +13,10 @@ import androidx.navigation.fragment.findNavController
 import com.freekickr.trackerapp.R
 import com.freekickr.trackerapp.database.entities.Track
 import com.freekickr.trackerapp.databinding.FragmentTrackingBinding
+import com.freekickr.trackerapp.domain.User
 import com.freekickr.trackerapp.services.Polyline
 import com.freekickr.trackerapp.services.TrackingService
-import com.freekickr.trackerapp.ui.viewmodels.MainViewModel
+import com.freekickr.trackerapp.ui.viewmodels.TrackingViewModel
 import com.freekickr.trackerapp.utils.Constants.ACTION_PAUSE_SERVICE
 import com.freekickr.trackerapp.utils.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.freekickr.trackerapp.utils.Constants.ACTION_STOP_SERVICE
@@ -32,6 +33,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Named
 import kotlin.math.round
 
 @AndroidEntryPoint
@@ -39,7 +42,7 @@ class TrackingFragment : Fragment() {
 
     private lateinit var binding: FragmentTrackingBinding
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: TrackingViewModel by viewModels()
 
     private var isTracking: MutableLiveData<Boolean> = MutableLiveData(false)
     private var pathPoints = mutableListOf<Polyline>()
@@ -48,7 +51,9 @@ class TrackingFragment : Fragment() {
 
     private var currentTimeInMillis = 0L
 
-    private var weight = 80f
+    val weight: Float by lazy {
+        viewModel.getUserWeight()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,7 +83,7 @@ class TrackingFragment : Fragment() {
 
     private fun observeTrackingState() {
         isTracking.observe(viewLifecycleOwner, {
-            if (!it) {
+            if (!it && currentTimeInMillis > 0L) {
                 binding.fabStartTracking.setImageDrawable(
                     ContextCompat.getDrawable(
                         requireContext(),
@@ -228,9 +233,12 @@ class TrackingFragment : Fragment() {
             viewModel.insertTrack(track)
             Snackbar.make(
                 requireActivity().findViewById(R.id.rootView),
-                "Track saved succesfully",
+                "Track saved successfully",
                 Snackbar.LENGTH_LONG
-            ).show()
+            ).apply {
+                anchorView = requireActivity().findViewById(R.id.bottomNavigationView)
+                show()
+            }
             stopTrack()
         }
     }

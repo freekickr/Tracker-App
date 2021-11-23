@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/runFragment" android:title="@string/tracks" android:icon="@drawable/ic_baseline_directions_run_24"/>
+    <item android:id="@+id/historyFragment" android:title="@string/tracks" android:icon="@drawable/ic_baseline_directions_run_24"/>
     <item android:id="@+id/statsFragment" android:title="@string/stats" android:icon="@drawable/ic_baseline_trending_up_24"/>
-    <item android:id="@+id/settingsFragment" android:title="@string/settings" android:icon="@drawable/ic_baseline_settings_24"/>
+    <item android:id="@+id/appSettingsFragment" android:title="@string/settings" android:icon="@drawable/ic_baseline_settings_24"/>
 
 </menu>

@@ -3,6 +3,11 @@ package com.freekickr.trackerapp.di
 import android.content.Context
 import androidx.room.Room
 import com.freekickr.trackerapp.database.TrackerDatabase
+import com.freekickr.trackerapp.domain.repo.IDatabaseRepo
+import com.freekickr.trackerapp.domain.repo.ISharedPreferencesRepo
+import com.freekickr.trackerapp.repositories.DatabaseRepository
+import com.freekickr.trackerapp.repositories.SharedPreferencesRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,7 +17,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DatabaseModule {
+object AppModule {
 
     @Singleton
     @Provides
@@ -23,4 +28,5 @@ object DatabaseModule {
     @Singleton
     @Provides
     fun provideTrackerDao(database: TrackerDatabase) = database.getTrackDao()
+
 }

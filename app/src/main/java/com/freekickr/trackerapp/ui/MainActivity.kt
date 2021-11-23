@@ -3,7 +3,10 @@ package com.freekickr.trackerapp.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -25,9 +28,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
-        setSupportActionBar(binding.topAppBar)
-
         setContentView(binding.root)
+
+        setSupportActionBar(binding.topAppBar)
 
         navController = findNavController(R.id.navHostFragment)
 
@@ -46,8 +49,8 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when (destination.id) {
-                R.id.runFragment,
-                R.id.settingsFragment,
+                R.id.historyFragment,
+                R.id.appSettingsFragment,
                 R.id.statsFragment -> {
                     binding.bottomNavigationView.visibility = View.VISIBLE
                 }

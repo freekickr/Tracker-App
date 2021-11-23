@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.freekickr.trackerapp.databinding.FragmentSplashBinding
+import com.freekickr.trackerapp.ui.viewmodels.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -20,6 +22,8 @@ class SplashFragment: Fragment() {
     private val delayTime: Long = 800L
 
     private lateinit var binding: FragmentSplashBinding
+
+    private val viewModel: SplashViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,9 +37,14 @@ class SplashFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         lifecycleScope.launch {
             delay(delayTime)
-            findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToLoginFragment())
+            if (viewModel.checkColdStart()) {
+                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToLoginFragment())
+            } else {
+                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHistoryFragment())
+            }
         }
     }
 

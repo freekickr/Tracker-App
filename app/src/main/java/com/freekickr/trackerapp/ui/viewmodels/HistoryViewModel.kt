@@ -2,16 +2,14 @@ package com.freekickr.trackerapp.ui.viewmodels
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.freekickr.trackerapp.database.entities.Track
 import com.freekickr.trackerapp.domain.TrackSortingOrder
-import com.freekickr.trackerapp.repositories.MainRepository
+import com.freekickr.trackerapp.domain.repo.IDatabaseRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
+class HistoryViewModel @Inject constructor(repository: IDatabaseRepo) : ViewModel() {
 
     private val tracksSortedByDate = repository.getAllTracksSortedBy(TrackSortingOrder.DATE)
     private val tracksSortedByElapsedTime = repository.getAllTracksSortedBy(TrackSortingOrder.ELAPSED_TIME)
@@ -70,12 +68,6 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
             TrackSortingOrder.ELAPSED_TIME -> tracksSortedByElapsedTime.value?.let { tracks.value = it }
         }.also {
             this.sortType = sort
-        }
-    }
-
-    fun insertTrack(track: Track) {
-        viewModelScope.launch {
-            repository.insertTrack(track)
         }
     }
 

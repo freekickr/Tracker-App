@@ -54,6 +54,7 @@
         app:startIconDrawable="@drawable/ic_baseline_account_circle_24">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tietName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName" />
@@ -77,9 +78,10 @@
         app:startIconDrawable="@drawable/ic_baseline_insert_chart_24">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tietWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number" />
+            android:inputType="numberDecimal|numberSigned" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

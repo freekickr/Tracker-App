@@ -4,17 +4,18 @@ import androidx.lifecycle.LiveData
 import com.freekickr.trackerapp.database.daos.TrackDao
 import com.freekickr.trackerapp.database.entities.Track
 import com.freekickr.trackerapp.domain.TrackSortingOrder
+import com.freekickr.trackerapp.domain.repo.IDatabaseRepo
 import javax.inject.Inject
 
-class MainRepository @Inject constructor(
-    val dao: TrackDao
-) {
+class DatabaseRepository @Inject constructor(
+    private val dao: TrackDao
+): IDatabaseRepo {
 
-    suspend fun insertTrack(track: Track) = dao.insert(track)
+    override suspend fun insertTrack(track: Track) = dao.insert(track)
 
-    suspend fun deleteTrack(track: Track) = dao.delete(track)
+    override suspend fun deleteTrack(track: Track) = dao.delete(track)
 
-    fun getAllTracksSortedBy(order: TrackSortingOrder): LiveData<List<Track>> {
+    override fun getAllTracksSortedBy(order: TrackSortingOrder): LiveData<List<Track>> {
         return when(order) {
             TrackSortingOrder.AVG_SPEED -> dao.getAllSortedByAvgSpeed()
             TrackSortingOrder.CALORIES -> dao.getAllSortedByCalories()
@@ -24,12 +25,12 @@ class MainRepository @Inject constructor(
         }
     }
 
-    fun getTotalAvgSpeed() = dao.getTotalAvgSpeed()
+    override fun getTotalAvgSpeed() = dao.getTotalAvgSpeed()
 
-    fun getTotalDistance() = dao.getTotalDistance()
+    override fun getTotalDistance() = dao.getTotalDistance()
 
-    fun getTotalCalories() = dao.getTotalCalories()
+    override fun getTotalCalories() = dao.getTotalCalories()
 
-    fun getTotalElapsedTime() = dao.getTotalElapsedTime()
+    override fun getTotalElapsedTime() = dao.getTotalElapsedTime()
 
 }

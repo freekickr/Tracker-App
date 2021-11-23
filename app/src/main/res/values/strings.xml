@@ -10,4 +10,18 @@
     <string name="add_track">Add track</string>
     <string name="remember_me">Remember me</string>
     <string name="pause">Pause</string>
+    <string name="apply_changes">Apply changes</string>
+    <string name="personal_info">Personal information</string>
+    <string name="app_settings">Application settings</string>
+    <string name="language">Language</string>
+    <string name="check_app_permissions">Check app permissions</string>
+    <string name="clear_tracks">Clear all tracks</string>
+
+    <!--    SHARED PREFERENCES NAMES-->
+    <string name="app_shared_prefs">tracking_prefs</string>
+    <string name="key_cold_start">is_cold_start</string>
+    <string name="key_user_name">user_name</string>
+    <string name="key_user_weight">user_weight</string>
+    <string name="key_language">user_weight</string>
+    <string name="key_clear_tracks">clear_tracks</string>
 </resources>

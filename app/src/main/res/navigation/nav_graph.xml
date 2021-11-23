@@ -10,12 +10,12 @@
         app:launchSingleTop="true"/>
 
     <fragment
-        tools:layout="@layout/fragment_run"
-        android:id="@+id/runFragment"
-        android:name="com.freekickr.trackerapp.ui.fragments.RunFragment"
-        android:label="RunFragment" >
+        tools:layout="@layout/fragment_history"
+        android:id="@+id/historyFragment"
+        android:name="com.freekickr.trackerapp.ui.fragments.HistoryFragment"
+        android:label="HistoryFragment" >
         <action
-            android:id="@+id/action_runFragment_to_trackingFragment"
+            android:id="@+id/action_historyFragment_to_trackingFragment"
             app:destination="@id/trackingFragment" />
     </fragment>
     <fragment
@@ -39,8 +39,8 @@
         android:name="com.freekickr.trackerapp.ui.fragments.LoginFragment"
         android:label="LoginFragment" >
         <action
-            android:id="@+id/action_loginFragment_to_runFragment"
-            app:destination="@id/runFragment"
+            android:id="@+id/action_loginFragment_to_historyFragment"
+            app:destination="@id/historyFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/nav_graph"
@@ -58,5 +58,14 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_historyFragment"
+            app:destination="@id/historyFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/appSettingsFragment"
+        android:name="com.freekickr.trackerapp.ui.fragments.AppSettingsFragment"
+        android:label="AppSettingsFragment" />
 </navigation>
