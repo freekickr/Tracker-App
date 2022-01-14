@@ -2,6 +2,7 @@ package com.freekickr.trackerapp.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,6 +63,7 @@ class TrackingFragment : Fragment() {
     ): View? {
         binding = FragmentTrackingBinding.inflate(layoutInflater)
 
+
         setButtonsListeners()
 
         observeTrackingState()
@@ -83,16 +85,22 @@ class TrackingFragment : Fragment() {
 
     private fun observeTrackingState() {
         isTracking.observe(viewLifecycleOwner, {
-            if (!it && currentTimeInMillis > 0L) {
+            Log.d("TAG", "observeTrackingState: $currentTimeInMillis $it")
+            if (!it && currentTimeInMillis == 0L) {
                 binding.fabStartTracking.setImageDrawable(
                     ContextCompat.getDrawable(
                         requireContext(),
                         R.drawable.ic_baseline_play_arrow_24
                     )
                 )
-                if (currentTimeInMillis > 0L) {
-                    showAdditionalButtons()
-                }
+            } else if (!it && currentTimeInMillis > 0L) {
+                showAdditionalButtons()
+                binding.fabStartTracking.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_baseline_play_arrow_24
+                    )
+                )
             } else {
                 binding.fabStartTracking.setImageDrawable(
                     ContextCompat.getDrawable(
@@ -165,6 +173,8 @@ class TrackingFragment : Fragment() {
     }
 
     private fun stopTrack() {
+        currentTimeInMillis = 0L
+        pathPoints.clear()
         sendCommandToService(ACTION_STOP_SERVICE)
         findNavController().navigateUp()
     }

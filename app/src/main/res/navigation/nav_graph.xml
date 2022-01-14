@@ -24,11 +24,6 @@
         android:name="com.freekickr.trackerapp.ui.fragments.StatsFragment"
         android:label="StatsFragment" />
     <fragment
-        tools:layout="@layout/fragment_settings"
-        android:id="@+id/settingsFragment"
-        android:name="com.freekickr.trackerapp.ui.fragments.SettingsFragment"
-        android:label="SettingsFragment" />
-    <fragment
         tools:layout="@layout/fragment_tracking"
         android:id="@+id/trackingFragment"
         android:name="com.freekickr.trackerapp.ui.fragments.TrackingFragment"

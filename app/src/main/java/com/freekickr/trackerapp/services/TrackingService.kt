@@ -95,6 +95,7 @@ class TrackingService : LifecycleService() {
         isServiceKilled = true
         isFirstRun = true
         pauseService()
+        clearData()
         stopForeground(true)
         stopSelf()
     }
@@ -151,6 +152,12 @@ class TrackingService : LifecycleService() {
             }
             timeRun += lapTime
         }
+    }
+
+    private fun clearData() {
+        _pathPoints.postValue(mutableListOf())
+        _timeRunInSeconds.postValue(0L)
+        _timeRunInMillis.postValue(0L)
     }
 
     private fun pauseService() {
